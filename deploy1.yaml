@@ -1,6 +1,6 @@
 --- #deploy index
 
-- hosts: devlinux
+- hosts: devlinux[0]
   user: ansible
   become: yes
   connection: ssh
