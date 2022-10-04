@@ -1,0 +1,21 @@
+--- #deploy index
+
+- hosts: devlinux
+  user: ansible
+  become: yes
+  connection: ssh
+  gather_facts: yes
+
+  vars:
+    pkgname: httpd
+    index_path: /var/www/html/
+
+  tasks:
+    - name: install apache
+      action: yum pkg="{{pkgname}}" state=present
+
+    - name: start apache
+      action: service name="{{pkgname}}" state=started
+
+    - name: deploy index
+      action: copy src=index.html dest="{{index_path}}"
